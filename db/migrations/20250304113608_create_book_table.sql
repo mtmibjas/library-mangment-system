@@ -8,7 +8,9 @@ CREATE TABLE books (
     available BOOLEAN DEFAULT TRUE,
     FOREIGN KEY (category_id) REFERENCES category (id) ON DELETE CASCADE
 );
-
+CREATE INDEX idx_books_category_id ON books(category_id);
+CREATE INDEX idx_books_title ON books(title);
+CREATE INDEX idx_books_author ON books(author);
 -- +goose StatementEnd
 
 -- +goose Down

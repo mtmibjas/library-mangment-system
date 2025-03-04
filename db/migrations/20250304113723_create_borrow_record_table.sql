@@ -9,6 +9,9 @@ CREATE TABLE borrow_records (
     FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE,
     FOREIGN KEY (book_id) REFERENCES books(id) ON DELETE CASCADE
 );
+CREATE INDEX idx_borrow_records_user_id ON borrow_records(user_id);
+CREATE INDEX idx_borrow_records_book_id ON borrow_records(book_id);
+CREATE INDEX idx_borrow_records_borrowed_at ON borrow_records(borrowed_at);
 -- +goose StatementEnd
 
 -- +goose Down
