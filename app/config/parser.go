@@ -2,10 +2,12 @@ package config
 
 func Parse(cfgDir string) *Config {
 	dir := getDirPath(cfgDir)
+	dbConfig := parseDBConfig(dir)
 	return &Config{
 		Service: parseServiceConfig(dir),
 		Logs:    parseLoggerConfig(dir),
-		DB:      parseDBConfig(dir),
+		DB:      dbConfig,
+		Redis:   dbConfig.Redis,
 	}
 }
 

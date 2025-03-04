@@ -29,6 +29,7 @@ func (r *Resolver) Resolve() *container.Container {
 }
 
 func (r *Resolver) resolveAdapters() {
+	redisClient := resolveRedisAdapter(r.Config.Redis)
 	db, err := resolveDBAdapter(r.Config.DB)
 	if err != nil {
 		panic(fmt.Sprintf("error: %v", err))
@@ -36,5 +37,6 @@ func (r *Resolver) resolveAdapters() {
 
 	r.Adapters = container.Adapters{
 		Database: db,
+		Redis:    redisClient,
 	}
 }

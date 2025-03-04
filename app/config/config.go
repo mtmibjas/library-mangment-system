@@ -4,6 +4,7 @@ type Config struct {
 	Service ServiceConfig
 	Logs    LoggerConfig
 	DB      DBConfig
+	Redis   Redis
 }
 type LogConfig struct {
 	Level    string      `yaml:"level"`
@@ -30,6 +31,7 @@ type DBConfig struct {
 	PoolSize        int    `yaml:"pool_size"`
 	MaxIdleConns    int    `yaml:"max_idle_conns"`
 	ConnMaxLifetime int    `yaml:"conn_max_lifetime"`
+	Redis           Redis  `yaml:"redis"`
 }
 type LogRotation struct {
 	MaxSize    int  `yaml:"max_size"`
@@ -45,4 +47,18 @@ type LogFile struct {
 
 type LoggerConfig struct {
 	Logs []LogConfig `yaml:"logs"`
+}
+
+type Redis struct {
+	Host     string `yaml:"host"`
+	Port     string `yaml:"port"`
+	Password string `yaml:"password"`
+}
+
+type RedisConfig struct {
+	Host     string
+	Port     int
+	Database string
+	User     string
+	Password string
 }

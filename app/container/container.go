@@ -3,6 +3,8 @@ package container
 import (
 	"database/sql"
 	"library-mngmt/domain/repositories"
+
+	"github.com/redis/go-redis/v9"
 )
 
 type Container struct {
@@ -19,4 +21,5 @@ type Repositories struct {
 
 type Adapters struct {
 	Database *sql.DB
+	Redis    *redis.Client
 }
