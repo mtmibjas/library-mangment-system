@@ -1,0 +1,14 @@
+name: library-mngmt 
+mode: DEBUG
+app_env: DEV
+base_url: http://localhost
+port: 5003
+rps: 100
+timezone: GMT+0400
+timeout: 5
+encryption_key: abc&1*~#^2^#s0^=)^^7%b34
+jwt_secret: javainuse_secret_key
+metrics:
+  enabled: true
+  port: 6000
+  route: /metrics

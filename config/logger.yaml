@@ -1,0 +1,60 @@
+logs:
+  - level: debug
+    file:
+      path: /library-mngmt.
+      name: debug.log
+    rotation:
+      max_size: 1
+      max_backups: 5
+      max_age: 30
+      compress: false
+
+  - level: info
+    file:
+      path: /library-mngmt.
+      name: info.log
+    rotation:
+      max_size: 1
+      max_backups: 5
+      max_age: 30
+      compress: false
+
+  - level: error
+    file:
+      path: /library-mngmt.
+      name: error.log
+    rotation:
+      max_size: 1
+      max_backups: 5
+      max_age: 30
+      compress: false
+
+  - level: fatal
+    file:
+      path: /library-mngmt.
+      name: fatal.log
+    rotation:
+      max_size: 1
+      max_backups: 5
+      max_age: 30
+      compress: false
+
+  - level: warn
+    file:
+      path: /library-mngmt.
+      name: warn.log
+    rotation:
+      max_size: 1
+      max_backups: 5
+      max_age: 30
+      compress: false
+
+  - level: panic
+    file:
+      path: /library-mngmt.
+      name: panic.log
+    rotation:
+      max_size: 1
+      max_backups: 5
+      max_age: 30
+      compress: false

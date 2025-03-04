@@ -1,0 +1,614 @@
+definitions:
+  request.CreateBookRequest:
+    properties:
+      author:
+        type: string
+      category_id:
+        type: integer
+      title:
+        type: string
+    required:
+    - author
+    - category_id
+    - title
+    type: object
+  request.CreateLoginRequest:
+    properties:
+      email:
+        type: string
+      password:
+        type: string
+    required:
+    - email
+    - password
+    type: object
+  request.CreatePermissionRequest:
+    properties:
+      action:
+        type: string
+    required:
+    - action
+    type: object
+  request.CreateRolePermissionRequest:
+    properties:
+      permission_id:
+        type: integer
+      role_id:
+        type: integer
+    required:
+    - permission_id
+    - role_id
+    type: object
+  request.RefreshTokenRequest:
+    properties:
+      refresh_token:
+        type: string
+    required:
+    - refresh_token
+    type: object
+  request.RemoveRolePermissionRequest:
+    properties:
+      permission_id:
+        type: integer
+      role_id:
+        type: integer
+    required:
+    - permission_id
+    - role_id
+    type: object
+  request.UpdateBookRequest:
+    properties:
+      author:
+        type: string
+      available:
+        type: boolean
+      category_id:
+        type: integer
+      id:
+        type: integer
+      title:
+        type: string
+    required:
+    - author
+    - available
+    - category_id
+    - id
+    - title
+    type: object
+  request.UpdatePermissionRequest:
+    properties:
+      action:
+        type: string
+      id:
+        type: integer
+    required:
+    - action
+    - id
+    type: object
+  response.LoginResponse:
+    properties:
+      access_token:
+        type: string
+      api_key:
+        type: string
+      refresh_token:
+        type: string
+      user_id:
+        type: integer
+    type: object
+  response.RefreshTokenResponse:
+    properties:
+      access_token:
+        type: string
+    type: object
+info:
+  contact: {}
+  title: Backend API
+  version: "1.0"
+paths:
+  /admin/permissions:
+    post:
+      consumes:
+      - application/json
+      description: This API creates a new permission.
+      parameters:
+      - description: Permission data
+        in: body
+        name: permission
+        required: true
+        schema:
+          $ref: '#/definitions/request.CreatePermissionRequest'
+      produces:
+      - application/json
+      responses:
+        "201":
+          description: Permission created successfully
+          schema:
+            additionalProperties: true
+            type: object
+        "400":
+          description: Invalid request
+          schema:
+            additionalProperties: true
+            type: object
+        "500":
+          description: Internal server error
+          schema:
+            additionalProperties: true
+            type: object
+      summary: Create a new permission
+      tags:
+      - admin
+  /admin/roles:
+    patch:
+      consumes:
+      - application/json
+      description: This API removes a permission from a role.
+      parameters:
+      - description: Role data
+        in: body
+        name: role
+        required: true
+        schema:
+          $ref: '#/definitions/request.RemoveRolePermissionRequest'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: Permission removed from role
+          schema:
+            additionalProperties: true
+            type: object
+        "400":
+          description: Invalid request
+          schema:
+            additionalProperties: true
+            type: object
+        "500":
+          description: Internal server error
+          schema:
+            additionalProperties: true
+            type: object
+      summary: Remove a permission from a role
+      tags:
+      - admin
+    post:
+      consumes:
+      - application/json
+      description: This API creates a new role.
+      parameters:
+      - description: Role data
+        in: body
+        name: role
+        required: true
+        schema:
+          $ref: '#/definitions/request.CreateRolePermissionRequest'
+      produces:
+      - application/json
+      responses:
+        "201":
+          description: Role created successfully
+          schema:
+            additionalProperties: true
+            type: object
+        "400":
+          description: Invalid request
+          schema:
+            additionalProperties: true
+            type: object
+        "500":
+          description: Internal server error
+          schema:
+            additionalProperties: true
+            type: object
+      summary: Create a new role
+      tags:
+      - admin
+  /api/v1/book:
+    get:
+      consumes:
+      - application/json
+      description: This API to Get list of books.
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: List of books
+          schema:
+            additionalProperties: true
+            type: object
+        "500":
+          description: Internal server error
+          schema:
+            additionalProperties: true
+            type: object
+      security:
+      - BearerAuth: []
+      - ApiKeyAuth: []
+      summary: Get list of books
+      tags:
+      - Books
+    post:
+      consumes:
+      - application/json
+      description: This API creates a new book.
+      parameters:
+      - description: Book data
+        in: body
+        name: book
+        required: true
+        schema:
+          $ref: '#/definitions/request.CreateBookRequest'
+      produces:
+      - application/json
+      responses:
+        "201":
+          description: Book created successfully
+          schema:
+            additionalProperties: true
+            type: object
+        "400":
+          description: Invalid request
+          schema:
+            additionalProperties: true
+            type: object
+        "500":
+          description: Internal server error
+          schema:
+            additionalProperties: true
+            type: object
+      security:
+      - BearerAuth: []
+      - ApiKeyAuth: []
+      summary: Create a new book
+      tags:
+      - Books
+  /api/v1/book/{id}:
+    delete:
+      consumes:
+      - application/json
+      description: This API to delete book.
+      parameters:
+      - description: Book ID
+        in: path
+        name: id
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: Book deleted successfully
+          schema:
+            additionalProperties: true
+            type: object
+        "400":
+          description: Invalid request
+          schema:
+            additionalProperties: true
+            type: object
+        "500":
+          description: Internal server error
+          schema:
+            additionalProperties: true
+            type: object
+      security:
+      - BearerAuth: []
+      - ApiKeyAuth: []
+      summary: Delete book
+      tags:
+      - Books
+    get:
+      consumes:
+      - application/json
+      description: This API to Get book details.
+      parameters:
+      - description: Book ID
+        in: path
+        name: id
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: Book details
+          schema:
+            additionalProperties: true
+            type: object
+        "400":
+          description: Invalid request
+          schema:
+            additionalProperties: true
+            type: object
+        "500":
+          description: Internal server error
+          schema:
+            additionalProperties: true
+            type: object
+      security:
+      - BearerAuth: []
+      - ApiKeyAuth: []
+      summary: Get book details
+      tags:
+      - Books
+    put:
+      consumes:
+      - application/json
+      description: This API to update book.
+      parameters:
+      - description: Book ID
+        in: path
+        name: id
+        required: true
+        type: integer
+      - description: Book data
+        in: body
+        name: book
+        required: true
+        schema:
+          $ref: '#/definitions/request.UpdateBookRequest'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: Book updated successfully
+          schema:
+            additionalProperties: true
+            type: object
+        "400":
+          description: Invalid request
+          schema:
+            additionalProperties: true
+            type: object
+        "500":
+          description: Internal server error
+          schema:
+            additionalProperties: true
+            type: object
+      security:
+      - BearerAuth: []
+      - ApiKeyAuth: []
+      summary: Update book
+      tags:
+      - Books
+  /api/v1/book/{id}/history:
+    get:
+      consumes:
+      - application/json
+      description: This API to Get borrowed history by book ID.
+      parameters:
+      - description: Book ID
+        in: path
+        name: id
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: Borrowed history
+          schema:
+            additionalProperties: true
+            type: object
+        "400":
+          description: Invalid request
+          schema:
+            additionalProperties: true
+            type: object
+        "500":
+          description: Internal server error
+          schema:
+            additionalProperties: true
+            type: object
+      security:
+      - BearerAuth: []
+      - ApiKeyAuth: []
+      summary: Get borrowed history by book ID
+      tags:
+      - Books
+  /auth/login:
+    post:
+      consumes:
+      - application/json
+      description: Login
+      parameters:
+      - description: Login
+        in: body
+        name: body
+        required: true
+        schema:
+          $ref: '#/definitions/request.CreateLoginRequest'
+      produces:
+      - application/json
+      responses:
+        "201":
+          description: Successful login
+          schema:
+            $ref: '#/definitions/response.LoginResponse'
+        "400":
+          description: Invalid request
+          schema:
+            additionalProperties: true
+            type: object
+        "500":
+          description: Internal server error
+          schema:
+            additionalProperties: true
+            type: object
+      summary: Login
+      tags:
+      - Auth
+  /auth/logout:
+    post:
+      description: Logout
+      responses:
+        "200":
+          description: Logout successful
+          schema:
+            additionalProperties: true
+            type: object
+        "500":
+          description: Internal server error
+          schema:
+            additionalProperties: true
+            type: object
+      security:
+      - BearerAuth: []
+      - ApiKeyAuth: []
+      summary: Logout
+      tags:
+      - Auth
+  /auth/refresh-token:
+    post:
+      consumes:
+      - application/json
+      description: Refresh Token
+      parameters:
+      - description: Refresh Token
+        in: body
+        name: body
+        required: true
+        schema:
+          $ref: '#/definitions/request.RefreshTokenRequest'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: Successful refresh token
+          schema:
+            $ref: '#/definitions/response.RefreshTokenResponse'
+        "400":
+          description: Invalid request
+          schema:
+            additionalProperties: true
+            type: object
+        "500":
+          description: Internal server error
+          schema:
+            additionalProperties: true
+            type: object
+      security:
+      - BearerAuth: []
+      - ApiKeyAuth: []
+      summary: Refresh Token
+      tags:
+      - Auth
+  /permission:
+    put:
+      consumes:
+      - application/json
+      description: This API updates a permission.
+      parameters:
+      - description: Permission data
+        in: body
+        name: permission
+        required: true
+        schema:
+          $ref: '#/definitions/request.UpdatePermissionRequest'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: Permission updated successfully
+          schema:
+            additionalProperties: true
+            type: object
+        "400":
+          description: Invalid request
+          schema:
+            additionalProperties: true
+            type: object
+        "500":
+          description: Internal server error
+          schema:
+            additionalProperties: true
+            type: object
+      summary: Update a permission
+      tags:
+      - admin
+  /permission/{id}:
+    delete:
+      consumes:
+      - application/json
+      description: This API deletes a permission.
+      parameters:
+      - description: Permission ID
+        in: path
+        name: id
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: Permission deleted
+          schema:
+            additionalProperties: true
+            type: object
+        "400":
+          description: Invalid request
+          schema:
+            additionalProperties: true
+            type: object
+        "500":
+          description: Internal server error
+          schema:
+            additionalProperties: true
+            type: object
+      summary: Delete a permission
+      tags:
+      - admin
+  /permissions:
+    get:
+      consumes:
+      - application/json
+      description: This API fetches all permissions.
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: List of permissions
+          schema:
+            additionalProperties: true
+            type: object
+        "500":
+          description: Internal server error
+          schema:
+            additionalProperties: true
+            type: object
+      summary: Get all permissions
+      tags:
+      - admin
+  /roles:
+    get:
+      consumes:
+      - application/json
+      description: This API fetches all roles.
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: List of roles
+          schema:
+            additionalProperties: true
+            type: object
+        "500":
+          description: Internal server error
+          schema:
+            additionalProperties: true
+            type: object
+      summary: Get all roles
+      tags:
+      - admin
+securityDefinitions:
+  ApiKeyAuth:
+    in: header
+    name: X-API-KEY
+    type: apiKey
+  BearerAuth:
+    description: Enter "Bearer <token>" format
+    in: header
+    name: Authorization
+    type: apiKey
+swagger: "2.0"
