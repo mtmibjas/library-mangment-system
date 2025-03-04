@@ -28,4 +28,12 @@ This is a backend api written in Go using the Echo framework that give needed ap
 ```bash
 git https://github.com/mtmibjas/library-mangment-system.git
 cd library-mangment-system.
+```
 
+### Instruction to setup the project
+1. Clone the project
+2. Setup the PostgresDB
+3. Add config details .env.local and config/*.yaml
+4. Run `make db-mig cmd=up`
+5. Run `make db-seed cmd=up`
+6. Run `make run`
