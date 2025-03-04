@@ -11,7 +11,6 @@ type Container struct {
 }
 
 type Repositories struct {
-	DataRepository  repositories.DataRepositoriesInterface
 	UserRepository  repositories.UserRepositoriesInterface
 	BookRepository  repositories.BookRepositoriesInterface
 	AuthRepository  repositories.AuthRepositoriesInterface
