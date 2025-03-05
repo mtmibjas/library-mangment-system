@@ -53,6 +53,7 @@ require (
 )
 
 require (
+	github.com/go-playground/validator v9.31.0+incompatible
 	github.com/labstack/echo/v4 v4.13.3
 	github.com/lib/pq v1.10.9
 	golang.org/x/crypto v0.35.0

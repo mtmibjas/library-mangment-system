@@ -6,18 +6,16 @@ import (
 	"library-mngmt/app/container"
 	"library-mngmt/app/http/controller"
 	middle "library-mngmt/app/http/middleware"
+	valid "library-mngmt/app/http/validator"
+
 	_ "library-mngmt/docs"
 	"net/http"
 
-	"github.com/go-playground/validator/v10"
+	"github.com/go-playground/validator"
 	"github.com/labstack/echo/v4"
 	"github.com/labstack/echo/v4/middleware"
 	echoSwagger "github.com/swaggo/echo-swagger"
 )
-
-type Validator struct {
-	validator *validator.Validate
-}
 
 func Init(cfg *config.Config, ctr *container.Container) *echo.Echo {
 
@@ -26,7 +24,9 @@ func Init(cfg *config.Config, ctr *container.Container) *echo.Echo {
 	// Middleware
 	e.Use(middleware.Logger())
 	e.Use(middleware.Recover())
-	e.Validator = &Validator{validator: validator.New()}
+	e.Validator = &valid.Validator{
+		Validator: validator.New(),
+	}
 
 	requestLimit := middle.NewRequestLimiter(cfg.Service.RequestPerSecond)
 
@@ -67,6 +67,7 @@ func Init(cfg *config.Config, ctr *container.Container) *echo.Echo {
 		adminManagement.PATCH("/permission/remove", anc.RemovePermissionFromRole)
 	}
 
+	// Book routes
 	bookGroup := e.Group("/api/v1/book")
 	bookManagement := bookGroup.Group("", authMiddlewares...)
 	{
@@ -78,6 +79,7 @@ func Init(cfg *config.Config, ctr *container.Container) *echo.Echo {
 		bookManagement.GET("/{id}/history", bc.GetBorrowedHistoryByBookID)
 	}
 
+	// User routes
 	userGroup := e.Group("/api/v1/user")
 	userManagement := userGroup.Group("", authMiddlewares...)
 	{
@@ -96,7 +98,4 @@ func Init(cfg *config.Config, ctr *container.Container) *echo.Echo {
 		OpenBrowser(fmt.Sprintf("%s:%d%s", cfg.Service.BaseURL, cfg.Service.Port, "/swagger/index.html"))
 	}()
 	return e
-}
-func (cv *Validator) Validate(i interface{}) error {
-	return cv.validator.Struct(i)
 }
