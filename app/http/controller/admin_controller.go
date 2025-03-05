@@ -26,7 +26,7 @@ func NewAdminController(ctr *container.Container) *AdminController {
 // CreatePermission godoc
 // @Summary Create a new permission
 // @Description This API creates a new permission.
-// @Tags admin
+// @Tags Admin
 // @Accept json
 // @Produce json
 // @Param permission body request.CreatePermissionRequest true "Permission data"
@@ -54,7 +54,7 @@ func (ac *AdminController) CreatePermission(c echo.Context) error {
 // GetPermissions godoc
 // @Summary Get all permissions
 // @Description This API fetches all permissions.
-// @Tags admin
+// @Tags Admin
 // @Accept json
 // @Produce json
 // @Success 200 {object} map[string]interface{} "List of permissions"
@@ -74,7 +74,7 @@ func (a *AdminController) GetPermissions(c echo.Context) error {
 // UpdatePermission godoc
 // @Summary Update a permission
 // @Description This API updates a permission.
-// @Tags admin
+// @Tags Admin
 // @Accept json
 // @Produce json
 // @Param permission body request.UpdatePermissionRequest true "Permission data"
@@ -101,7 +101,7 @@ func (a *AdminController) UpdatePermission(c echo.Context) error {
 // DeletePermission godoc
 // @Summary Delete a permission
 // @Description This API deletes a permission.
-// @Tags admin
+// @Tags Admin
 // @Accept json
 // @Produce json
 // @Param id path int true "Permission ID"
@@ -126,7 +126,7 @@ func (a *AdminController) DeletePermission(c echo.Context) error {
 // CreateRole godoc
 // @Summary Create a new role
 // @Description This API creates a new role.
-// @Tags admin
+// @Tags Admin
 // @Accept json
 // @Produce json
 // @Param role body request.CreateRolePermissionRequest true "Role data"
@@ -150,7 +150,7 @@ func (a *AdminController) AddPermissionToRole(c echo.Context) error {
 // RemovePermissionFromRole godoc
 // @Summary Remove a permission from a role
 // @Description This API removes a permission from a role.
-// @Tags admin
+// @Tags Admin
 // @Accept json
 // @Produce json
 // @Param role body request.RemoveRolePermissionRequest true "Role data"
@@ -174,7 +174,7 @@ func (a *AdminController) RemovePermissionFromRole(c echo.Context) error {
 // GetRoles godoc
 // @Summary Get all roles
 // @Description This API fetches all roles.
-// @Tags admin
+// @Tags Admin
 // @Accept json
 // @Produce json
 // @Success 200 {object} map[string]interface{} "List of roles"

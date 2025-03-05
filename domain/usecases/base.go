@@ -15,8 +15,9 @@ type BookService struct {
 	BookRepository repositories.BookRepositoriesInterface
 }
 type AuthService struct {
-	AuthRepository repositories.AuthRepositoriesInterface
-	UserRepository repositories.UserRepositoriesInterface
+	AuthRepository  repositories.AuthRepositoriesInterface
+	UserRepository  repositories.UserRepositoriesInterface
+	AdminRepository repositories.AdminRepositoriesInterface
 }
 
 func NewUserService(ctr *container.Container) *UserService {
@@ -31,8 +32,9 @@ func NewBookService(ctr *container.Container) *BookService {
 }
 func NewAuthService(ctr *container.Container) *AuthService {
 	return &AuthService{
-		AuthRepository: ctr.Repositories.AuthRepository,
-		UserRepository: ctr.Repositories.UserRepository,
+		AuthRepository:  ctr.Repositories.AuthRepository,
+		UserRepository:  ctr.Repositories.UserRepository,
+		AdminRepository: ctr.Repositories.AdminRepository,
 	}
 }
 func NewAdminService(ctr *container.Container) *AdminService {

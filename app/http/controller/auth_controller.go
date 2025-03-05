@@ -128,3 +128,15 @@ func (ac *AuthController) ValidateAPIKey(next echo.HandlerFunc) echo.HandlerFunc
 		return next(c)
 	}
 }
+
+func (ac *AuthController) ValidateRolePermission(permission string) echo.MiddlewareFunc {
+	return func(next echo.HandlerFunc) echo.HandlerFunc {
+		return func(c echo.Context) error {
+			role := c.Get("role_id").(float64)
+			if !ac.AuthService.ValidateRolePermission(uint(role), permission) {
+				return response.Error(c, http.StatusForbidden, errors.New("forbidden"))
+			}
+			return next(c)
+		}
+	}
+}

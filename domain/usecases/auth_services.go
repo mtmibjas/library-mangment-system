@@ -101,3 +101,17 @@ func (a *AuthService) Logout(userID uint) error {
 	}
 	return nil
 }
+
+func (a *AuthService) ValidateRolePermission(roleID uint, permission string) bool {
+	permissions, err := a.AdminRepository.GetPermissionsRoleID(roleID)
+	if err != nil {
+		return false
+	}
+	for _, p := range permissions {
+		if p.Action == permission {
+			return true
+		}
+	}
+
+	return false
+}

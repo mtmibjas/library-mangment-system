@@ -61,7 +61,24 @@ func (ar *AdminRepository) GetPermissions() ([]entities.Permission, error) {
 	}
 	return permissions, nil
 }
-
+func (ar *AdminRepository) GetPermissionsRoleID(roleID uint) ([]entities.RolePermission, error) {
+	var permissions []entities.RolePermission
+	query := `SELECT rp.id, rp.role_id, rp.permission_id, p.action
+	 FROM role_permissions as rp inner join permissions as p on p.id = rp.permission_id  WHERE rp.role_id = $1 `
+	rows, err := ar.Database.Query(query, roleID)
+	if err != nil {
+		return nil, err
+	}
+	for rows.Next() {
+		var permission entities.RolePermission
+		err := rows.Scan(&permission.ID, &permission.RoleID, &permission.PermissionID, &permission.Action)
+		if err != nil {
+			return nil, err
+		}
+		permissions = append(permissions, permission)
+	}
+	return permissions, nil
+}
 func (ar *AdminRepository) GetRoles() ([]entities.Role, error) {
 	var roles []entities.Role
 	query := `SELECT * FROM roles`

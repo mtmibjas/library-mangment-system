@@ -54,7 +54,8 @@ func Init(cfg *config.Config, ctr *container.Container) *echo.Echo {
 
 	// Admin routes
 	adminGroup := e.Group("/api/v1/admin")
-	adminManagement := adminGroup.Group("", authMiddlewares...)
+	adminGroup.Group("", authMiddlewares...)
+	adminManagement := adminGroup.Group("", ac.ValidateRolePermission("permission"))
 	{
 		adminManagement.POST("/permission", anc.CreatePermission)
 		adminManagement.GET("/permissions", anc.GetPermissions)
@@ -69,9 +70,9 @@ func Init(cfg *config.Config, ctr *container.Container) *echo.Echo {
 	bookGroup := e.Group("/api/v1/book")
 	bookManagement := bookGroup.Group("", authMiddlewares...)
 	{
-		bookManagement.POST("", bc.CreateBook)
-		bookManagement.PUT("/{id}", bc.UpdateBook)
-		bookManagement.DELETE("/{id}", bc.DeleteBook)
+		bookManagement.POST("", bc.CreateBook, ac.ValidateRolePermission("book"))
+		bookManagement.PUT("/{id}", bc.UpdateBook, ac.ValidateRolePermission("book"))
+		bookManagement.DELETE("/{id}", bc.DeleteBook, ac.ValidateRolePermission("book"))
 		bookManagement.GET("/{id}", bc.GetBook)
 		bookManagement.GET("", bc.GetBookList)
 		bookManagement.GET("/{id}/history", bc.GetBorrowedHistoryByBookID)
@@ -80,13 +81,13 @@ func Init(cfg *config.Config, ctr *container.Container) *echo.Echo {
 	userGroup := e.Group("/api/v1/user")
 	userManagement := userGroup.Group("", authMiddlewares...)
 	{
-		userManagement.POST("", uc.CreateUser)
-		e.GET("/{id}", uc.GetUser)
-		e.PUT("/{id}", uc.UpdateUser)
-		e.DELETE("/{id}", uc.DeleteUser)
-		e.GET("", uc.GetUserList)
-		e.GET("/email", uc.GetUserByEmail)
-		e.GET("/{id}/history", uc.GetBorrowedHistoryByUserID)
+		userManagement.POST("", uc.CreateUser, ac.ValidateRolePermission("user"))
+		userManagement.GET("/{id}", uc.GetUser)
+		userManagement.PUT("/{id}", uc.UpdateUser)
+		userManagement.DELETE("/{id}", uc.DeleteUser)
+		userManagement.GET("", uc.GetUserList)
+		userManagement.GET("/email", uc.GetUserByEmail)
+		userManagement.GET("/{id}/history", uc.GetBorrowedHistoryByUserID)
 	}
 
 	e.GET("/swagger/*", echoSwagger.WrapHandler)

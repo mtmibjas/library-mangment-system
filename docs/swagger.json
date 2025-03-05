@@ -16,7 +16,7 @@
                     "application/json"
                 ],
                 "tags": [
-                    "admin"
+                    "Admin"
                 ],
                 "summary": "Create a new role",
                 "parameters": [
@@ -65,7 +65,7 @@
                     "application/json"
                 ],
                 "tags": [
-                    "admin"
+                    "Admin"
                 ],
                 "summary": "Update a permission",
                 "parameters": [
@@ -112,7 +112,7 @@
                     "application/json"
                 ],
                 "tags": [
-                    "admin"
+                    "Admin"
                 ],
                 "summary": "Create a new permission",
                 "parameters": [
@@ -161,7 +161,7 @@
                     "application/json"
                 ],
                 "tags": [
-                    "admin"
+                    "Admin"
                 ],
                 "summary": "Delete a permission",
                 "parameters": [
@@ -208,7 +208,7 @@
                     "application/json"
                 ],
                 "tags": [
-                    "admin"
+                    "Admin"
                 ],
                 "summary": "Get all permissions",
                 "responses": {
@@ -239,7 +239,7 @@
                     "application/json"
                 ],
                 "tags": [
-                    "admin"
+                    "Admin"
                 ],
                 "summary": "Remove a permission from a role",
                 "parameters": [
@@ -288,7 +288,7 @@
                     "application/json"
                 ],
                 "tags": [
-                    "admin"
+                    "Admin"
                 ],
                 "summary": "Get all roles",
                 "responses": {

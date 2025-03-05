@@ -25,7 +25,7 @@ const docTemplate = `{
                     "application/json"
                 ],
                 "tags": [
-                    "admin"
+                    "Admin"
                 ],
                 "summary": "Create a new role",
                 "parameters": [
@@ -74,7 +74,7 @@ const docTemplate = `{
                     "application/json"
                 ],
                 "tags": [
-                    "admin"
+                    "Admin"
                 ],
                 "summary": "Update a permission",
                 "parameters": [
@@ -121,7 +121,7 @@ const docTemplate = `{
                     "application/json"
                 ],
                 "tags": [
-                    "admin"
+                    "Admin"
                 ],
                 "summary": "Create a new permission",
                 "parameters": [
@@ -170,7 +170,7 @@ const docTemplate = `{
                     "application/json"
                 ],
                 "tags": [
-                    "admin"
+                    "Admin"
                 ],
                 "summary": "Delete a permission",
                 "parameters": [
@@ -217,7 +217,7 @@ const docTemplate = `{
                     "application/json"
                 ],
                 "tags": [
-                    "admin"
+                    "Admin"
                 ],
                 "summary": "Get all permissions",
                 "responses": {
@@ -248,7 +248,7 @@ const docTemplate = `{
                     "application/json"
                 ],
                 "tags": [
-                    "admin"
+                    "Admin"
                 ],
                 "summary": "Remove a permission from a role",
                 "parameters": [
@@ -297,7 +297,7 @@ const docTemplate = `{
                     "application/json"
                 ],
                 "tags": [
-                    "admin"
+                    "Admin"
                 ],
                 "summary": "Get all roles",
                 "responses": {

@@ -36,4 +36,10 @@ cd library-mangment-system.
 3. Add config details .env.local and config/*.yaml
 4. Run `make db-mig cmd=up`
 5. Run `make db-seed cmd=up`
-6. Run `make run`
+6. Run `admin-run`
+7. Run `make run`
+
+### Sample Users
+Admin: admin@gmail.com@password
+Librarian: lib@gmail.com@password
+Member: member@gmail.com@password

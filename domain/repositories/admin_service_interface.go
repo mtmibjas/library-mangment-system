@@ -10,6 +10,7 @@ type AdminRepositoriesInterface interface {
 	DeleteRolePermission(rolePermission entities.RolePermission) error
 	GetPermissions() ([]entities.Permission, error)
 	GetRoles() ([]entities.Role, error)
+	GetPermissionsRoleID(roleID uint) ([]entities.RolePermission, error)
 }
 
 type AuthRepositoriesInterface interface {

@@ -180,7 +180,7 @@ paths:
             type: object
       summary: Create a new role
       tags:
-      - admin
+      - Admin
   /admin/v1/permission:
     post:
       consumes:
@@ -213,7 +213,7 @@ paths:
             type: object
       summary: Create a new permission
       tags:
-      - admin
+      - Admin
     put:
       consumes:
       - application/json
@@ -245,7 +245,7 @@ paths:
             type: object
       summary: Update a permission
       tags:
-      - admin
+      - Admin
   /admin/v1/permission/{id}:
     delete:
       consumes:
@@ -277,7 +277,7 @@ paths:
             type: object
       summary: Delete a permission
       tags:
-      - admin
+      - Admin
   /admin/v1/permissions:
     get:
       consumes:
@@ -298,7 +298,7 @@ paths:
             type: object
       summary: Get all permissions
       tags:
-      - admin
+      - Admin
   /admin/v1/remove:
     patch:
       consumes:
@@ -331,7 +331,7 @@ paths:
             type: object
       summary: Remove a permission from a role
       tags:
-      - admin
+      - Admin
   /admin/v1/roles:
     get:
       consumes:
@@ -352,7 +352,7 @@ paths:
             type: object
       summary: Get all roles
       tags:
-      - admin
+      - Admin
   /api/v1/book:
     get:
       consumes:
